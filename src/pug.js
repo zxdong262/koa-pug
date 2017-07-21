@@ -7,6 +7,7 @@ var pug = require('pug')
 var util = require('util')
 var endsWith = require('lodash.endswith')
 var assign = require('lodash.assign')
+var clone = require('lodash.clonedeep')
 var merge = require('lodash.merge')
 var isPlainObject = require('lodash.isplainobject')
 var forIn = require('lodash.forin')
@@ -77,8 +78,12 @@ function Pug (options) {
       merge(compileOptions, options)
     }
 
+    var newLocals = assign({}, locals, {
+      _global: clone(locals)
+    })
+
     if (compileOptions.fromString) {
-      return compileString(tpl, locals, compileOptions)
+      return compileString(tpl, newLocals, compileOptions)
     }
 
     var skipCache
@@ -89,7 +94,7 @@ function Pug (options) {
       skipCache = typeof noCache === 'boolean' ? noCache : globalNoCache
     }
 
-    return compileFile(tpl, locals, compileOptions, skipCache)
+    return compileFile(tpl, newLocals, compileOptions, skipCache)
   }
 
   /**

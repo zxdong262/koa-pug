@@ -175,6 +175,7 @@ describe('koa-pug', function () {
           })
           .expect(200, done)
       })
+
     })
 
     describe('middleware', function () {
@@ -203,6 +204,23 @@ describe('koa-pug', function () {
         app.use(function* (next) {
           this.state.name = 'Pug'
           this.render('h1 Hello, #{name}', {}, { fromString: true })
+          yield next
+        })
+
+        request(app).get('/').expect(function (res) {
+          $(res.text).text().should.eql('Hello, Pug')
+        })
+        .expect(200, done)
+      })
+
+      it('_global should work', function (done) {
+        var app = Koa()
+        var pug = new Pug()
+        app.use(pug.middleware)
+
+        app.use(function* (next) {
+          this.state.name = 'Pug'
+          this.render('h1 Hello, #{_global.name}', {}, { fromString: true })
           yield next
         })
 

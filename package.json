@@ -1,16 +1,16 @@
 {
-  "name": "koa-pug",
+  "name": "koa-pug-global",
   "version": "3.0.0-2",
-  "description": "A Pug middleware for Koa",
+  "description": "a fork of `koa-pug`, which add all locals props to `locals._global`",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chrisyip/koa-pug.git"
+    "url": "https://github.com/zxdong262/koa-pug-global.git"
   },
   "bugs": {
-    "url": "https://github.com/chrisyip/koa-pug/issues"
+    "url": "https://github.com/zxdong262/koa-pug-global/issues"
   },
-  "homepage": "https://github.com/chrisyip/koa-pug",
+  "homepage": "https://github.com/zxdong262/koa-pug-global",
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
     "mocha": "node --harmony node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha --bail --check-leaks test/",
@@ -20,16 +20,18 @@
     "koa",
     "jade",
     "template",
-    "pug"
+    "pug",
+    "global"
   ],
   "author": {
-    "name": "Chris Yip",
-    "email": "i@chrisyip.im"
+    "name": "ZHAO Xudong",
+    "email": "zxdong@gmail.com"
   },
   "license": "MIT",
   "dependencies": {
     "lodash.assign": "^3.2.0",
     "lodash.camelcase": "^3.0.1",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.endswith": "^3.2.0",
     "lodash.forin": "^3.0.2",
     "lodash.isobject": "^3.0.2",
